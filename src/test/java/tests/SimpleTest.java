@@ -1,4 +1,4 @@
-
+package tests;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
@@ -36,7 +36,7 @@ public class SimpleTest {
         $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
         $("#subjectsInput").setValue("Biology").pressEnter();
         $("#hobbiesWrapper").$(byText("Reading")).click();
-        $("#uploadPicture").uploadFile(new File("items/2.png"));
+        $("#uploadPicture").uploadFile(new File("src/test/resources/img/2.png"));
         $("#currentAddress").setValue("Lala street 44");
         $("div").scrollTo();
         $("#state").click();
@@ -59,6 +59,7 @@ public class SimpleTest {
                 Condition.text("Picture 2.png"),
                 Condition.text("Address Lala street 44"),
                 Condition.text("State and City NCR Noida")
+
         );
     }
 }
