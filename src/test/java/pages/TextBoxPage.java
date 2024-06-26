@@ -8,15 +8,14 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxPage {
 
-    private SelenideElement userName = $("#userName"),
+    private final SelenideElement userName = $("#userName"),
             userEmail = $("#userEmail"),
             currentAddress = $("#currentAddress"),
             permanentAddress = $("#permanentAddress"),
-            scrollForm = $(".body-height"),
             submitForm = $("#submit");
 
 
-    public static void openPage() {
+    public void openPage() {
         open("/text-box");
         $(".text-center").shouldHave(text("Text Box"));
     }
@@ -45,13 +44,8 @@ public class TextBoxPage {
         return this;
     }
 
-    public TextBoxPage setScrollForm() {
-        scrollForm.scrollTo();
 
-        return this;
-    }
-
-    public TextBoxPage setSubmitForm() {
+    public TextBoxPage submitForm() {
         submitForm.click();
 
         return this;

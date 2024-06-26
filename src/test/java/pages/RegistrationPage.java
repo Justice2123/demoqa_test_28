@@ -1,15 +1,19 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import components.CalendarComponent;
+import pages.components.CalendarComponent;
+
 import java.io.File;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
 public class RegistrationPage {
-    private SelenideElement firstNameInput = $("#firstName"),
+    private final SelenideElement
+            header = $(".text-center"),
+            firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
             genderWrapper = $("#genterWrapper"),
@@ -19,19 +23,21 @@ public class RegistrationPage {
             hobbiesWrapper = $("#hobbiesWrapper"),
             uploadPicture = $("#uploadPicture"),
             currentAddress = $("#currentAddress"),
-            scrollDiv = $("div"),
             state = $("#state"),
             stateWrapper = $("#stateCity-wrapper"),
             city = $("#city"),
             cityWrapper = $("#stateCity-wrapper"),
             submit = $("#submit");
 
-   CalendarComponent calendarComponent = new CalendarComponent();
+    CalendarComponent calendarComponent = new CalendarComponent();
 
-    public static void openPage() {
+    public void openPage() {
         open("/automation-practice-form");
-        $(".text-center").shouldHave(text("Practice Form"));
+        header.shouldHave(text("Practice Form"));
+        executeJavaScript("document.getElementById('close-fixedban').parentNode.remove()");
+        executeJavaScript("document.getElementsByTagName('footer')[0].remove()");
     }
+
 
     public RegistrationPage setFirstName(String value) {
         firstNameInput.setValue(value);
@@ -66,7 +72,7 @@ public class RegistrationPage {
 
     public RegistrationPage setDateOfBirth(String day, String month, String year) {
         calendarInput.click();
-        calendarComponent.setDate(day, month, year);
+        calendarComponent.setDate(month, year, day);
 
         return this;
     }
@@ -95,12 +101,6 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setDiv() {
-        scrollDiv.scrollTo();
-
-        return this;
-    }
-
     public RegistrationPage setState(String value) {
         state.click();
         stateWrapper.find(byText(value)).click();
@@ -115,7 +115,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubmit() {
+    public RegistrationPage submit() {
         submit.click();
 
         return this;

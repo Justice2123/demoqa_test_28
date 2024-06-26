@@ -3,84 +3,82 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
-import components.ChekSimpleTest;
+import pages.components.ModalWindow;
 
 
 public class SimpleTestWithPageObject extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
-    ChekSimpleTest chekSimpleTest = new ChekSimpleTest();
+    ModalWindow modalWindow = new ModalWindow();
+
     @Test
     void fillFormTests() {
-        RegistrationPage.openPage();
+
+        registrationPage.openPage();
 
         registrationPage
-            .setFirstName ("Ivan")
-            .setLastName("Ivanov")
-            .setEmailInput("ivanov@yahoo.com")
-            .setGenderWrapper("Male")
-            .setUserNumberInput("7958473526")
-            .setDateOfBirth("10", "October", "1990")
-            .setSubjectInput("Biology")
-            .setHobbiesWrapper("Reading")
-            .setUploadPicture("src/test/resources/img/2.png")
-            .setCurrentAddress("Lala street 44")
-            .setDiv()
-            .setState("NCR")
-            .setCity("Noida")
-            .setSubmit();
+                .setFirstName("Ivan")
+                .setLastName("Ivanov")
+                .setEmailInput("ivanov@yahoo.com")
+                .setGenderWrapper("Male")
+                .setUserNumberInput("7958473526")
+                .setDateOfBirth("10", "October", "1990")
+                .setSubjectInput("Biology")
+                .setHobbiesWrapper("Reading")
+                .setUploadPicture("src/test/resources/img/2.png")
+                .setCurrentAddress("Lala street 44")
+                .setState("NCR")
+                .setCity("Noida")
+                .submit();
 
 
-
-        chekSimpleTest
-                .chekModalSizes("Thanks for submitting the form")
-                .chekTableResponsive("Student Name", "Ivan Ivanov")
-                .chekTableResponsive("Student Email", "ivanov@yahoo.com")
-                .chekTableResponsive("Gender", "Male")
-                .chekTableResponsive("Mobile", "7958473526")
-                .chekTableResponsive("Date of Birth", "10 October,1990")
-                .chekTableResponsive("Subjects", "Biology")
-                .chekTableResponsive("Hobbies", "Reading")
-                .chekTableResponsive("Picture", "2.png")
-                .chekTableResponsive("Address", "Lala street 44")
-                .chekTableResponsive("State and City", "NCR Noida");
+        modalWindow
+                .checkModalHeader("Thanks for submitting the form")
+                .checkResultTable("Student Name", "Ivan Ivanov")
+                .checkResultTable("Student Email", "ivanov@yahoo.com")
+                .checkResultTable("Gender", "Male")
+                .checkResultTable("Mobile", "7958473526")
+                .checkResultTable("Date of Birth", "10 October,1990")
+                .checkResultTable("Subjects", "Biology")
+                .checkResultTable("Hobbies", "Reading")
+                .checkResultTable("Picture", "2.png")
+                .checkResultTable("Address", "Lala street 44")
+                .checkResultTable("State and City", "NCR Noida");
 
     }
 
     @Test
-    void minFormTest () {
-        RegistrationPage.openPage();
+    void minFormTest() {
+        registrationPage.openPage();
 
         registrationPage
-                .setFirstName ("Ivan")
+                .setFirstName("Ivan")
                 .setLastName("Ivanov")
                 .setGenderWrapper("Male")
                 .setUserNumberInput("7958473526")
-                .setDiv()
-                .setSubmit();
+                .submit();
 
 
-        chekSimpleTest
-                .chekModalSizes("Thanks for submitting the form")
-                .chekTableResponsive("Student Name", "Ivan Ivanov")
-                .chekTableResponsive("Gender", "Male")
-                .chekTableResponsive("Mobile", "7958473526");
+        modalWindow
+                .checkModalHeader("Thanks for submitting the form")
+                .checkResultTable("Student Name", "Ivan Ivanov")
+                .checkResultTable("Gender", "Male")
+                .checkResultTable("Mobile", "7958473526");
 
     }
 
     @Test
-    void negativeFormTest () {
-        RegistrationPage.openPage();
+    void negativeFormTest() {
+        registrationPage.openPage();
 
         registrationPage
-                .setFirstName ("Ivan")
+                .setFirstName("Ivan")
                 .setLastName("Ivanov")
                 .setGenderWrapper("Male")
                 .setUserNumberInput("ghjkl;hjk.")
-                .setDiv()
-                .setSubmit();
+                .submit();
 
-        chekSimpleTest.chekModalWindow();
+        modalWindow.modalWindowNotExist();
 
     }
 

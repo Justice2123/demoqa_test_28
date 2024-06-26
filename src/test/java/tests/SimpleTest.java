@@ -46,7 +46,6 @@ public class SimpleTest {
         $("#submit").click();
 
 
-
         $("#example-modal-sizes-title-lg").shouldHave(exactText("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(
                 Condition.text("Student Name Ivan Ivanov"),
